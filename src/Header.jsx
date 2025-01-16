@@ -16,7 +16,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleMode } from './redux/slices/dark'; 
+import { toggleMode } from './redux/slices/dark';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -24,8 +24,8 @@ const navItems = ['Home', 'About', 'Contact'];
 function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const dispatch = useDispatch();  
-  const mode = useSelector((state) => state.mode.mode);  
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.mode.mode);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -51,6 +51,10 @@ function DrawerAppBar(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
+
+  const switchButtonStyle = {
+    color: mode === 'dark' ? '#fff' : '#000',
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -80,14 +84,38 @@ function DrawerAppBar(props) {
               </Button>
             ))}
           </Box>
-          <label className="switch">
-            <input 
-              type="checkbox" 
-              checked={mode === 'dark'}  
-              onChange={() => dispatch(toggleMode())}  
+          <label className="switch" style={switchButtonStyle}>
+            <input
+              type="checkbox"
+              id="input" 
+              checked={mode === 'dark'}
+              onChange={() => dispatch(toggleMode())}
             />
-            <span className="slider"></span>
+            <div className="slider round">
+              <div className="sun-moon">
+                <svg id="moon-dot-1" className="moon-dot" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="50"></circle>
+                </svg>
+                <svg id="moon-dot-2" className="moon-dot" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="50"></circle>
+                </svg>
+                <svg id="moon-dot-3" className="moon-dot" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="50"></circle>
+                </svg>
+                <svg id="light-ray-1" className="light-ray" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="50"></circle>
+                </svg>
+              </div>
+              <div className="stars">
+                <svg id="star-1" className="star" viewBox="0 0 20 20">
+                  <path
+                    d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
           </label>
+
         </Toolbar>
       </AppBar>
       <nav>
@@ -97,7 +125,7 @@ function DrawerAppBar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, 
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
@@ -108,8 +136,7 @@ function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 3, backgroundColor: mode === 'dark' ? '#333' : '#fff' }}>
-      </Box>
+      <Box component="main" sx={{ p: 3, backgroundColor: mode === 'dark' ? '#333' : '#fff' }} />
     </Box>
   );
 }
