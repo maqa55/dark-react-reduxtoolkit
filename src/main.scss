@@ -1,0 +1,15 @@
+.main-container {
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;  
+  }
+  
+  .main-container.dark {
+    background-color: #333;
+    color: white;
+  }
+  
+  .main-container.light {
+    background-color: #fff;
+    color: black;
+  }
+  
