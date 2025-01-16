@@ -80,7 +80,6 @@ function DrawerAppBar(props) {
               </Button>
             ))}
           </Box>
-          {/* Dark mode toggle butonu */}
           <label className="switch">
             <input 
               type="checkbox" 
@@ -109,8 +108,7 @@ function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 0, backgroundColor: mode === 'dark' ? '#333' : '#fff' }}>
-        <Toolbar />
+      <Box component="main" sx={{ p: 3, backgroundColor: mode === 'dark' ? '#333' : '#fff' }}>
       </Box>
     </Box>
   );

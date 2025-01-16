@@ -1,19 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  mode: "dark",  
-};
+// localStorage'dan mode bilgisini oku, varsayılan olarak 'light' olmasını sağla
+const savedMode = localStorage.getItem('mode') || 'light';
 
-export const modeSlice = createSlice({
-  name: 'mode',  
-  initialState,
+const darkModeSlice = createSlice({
+  name: 'mode',
+  initialState: {
+    mode: savedMode, 
+  },
   reducers: {
-    toggleMode: (state) => {
-      state.mode = state.mode === "dark" ? "light" : "dark";  
+    toggleMode(state) {
+      state.mode = state.mode === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('mode', state.mode);
     },
   },
 });
 
-export const { toggleMode } = modeSlice.actions;
-
-export default modeSlice.reducer;
+export const { toggleMode } = darkModeSlice.actions;
+export default darkModeSlice.reducer;
